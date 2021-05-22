@@ -1,15 +1,22 @@
+export interface ICustomerCompany {
+  name: string;
+  website: string;
+}
+
 export interface ICustomer {
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
 
-  company: {
-    name: string;
-    website: string;
-  };
+  company: IUserCompany;
 
   tag: string | null;
+}
+
+export interface IUserCompany {
+  name: string;
+  website: string;
 }
 
 export interface IUser {
@@ -17,6 +24,6 @@ export interface IUser {
   email: string;
   mobile: string;
 
-  companies: { name: string; website: string }[];
+  companies: IUserCompany[];
   tag: string | null;
 }

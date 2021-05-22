@@ -120,4 +120,32 @@ const user = mapping<ICustomer, IUser>({
 // }
 ```
 
+#### 2.2. You can use multi function "mapping" to handle your function
+```typescript
+const user = mapping<ICustomer, IUser>({
+  from: customer,
+  mapper: {
+    email: 'email',
+    mobile: 'phone',
+    tag: 'tag'
+  },
+  option: {
+    setValueWhenNull: ''
+  },
+  handle: (from) => {
+    return {
+      name: `${from.firstName} ${from.lastName}`,
+      companies: [
+        mapping<ICustomerCompany, IUserCompany>({
+          from: customer.company,
+          mapper: {
+            name: 'name',
+            website: 'website'
+          }
+        })
+      ]
+    };
+  }
+});
+```
 Thank you for using!

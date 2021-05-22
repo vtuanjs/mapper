@@ -1,8 +1,11 @@
 type DefaultType = { [key: string]: unknown };
+
 type OptionProp = {
   setValueWhenNull?: string;
   setValueWhenUndefined?: string;
 };
+
+type PartialDeep<T> = { [P in keyof T]?: PartialDeep<T[P]> };
 
 export function mapping<SOURCE = DefaultType, DESTINATION = DefaultType>({
   from,
@@ -14,7 +17,7 @@ export function mapping<SOURCE = DefaultType, DESTINATION = DefaultType>({
   mapper: {
     [key: string]: keyof SOURCE;
   };
-  handle?: (from: SOURCE) => Partial<DESTINATION>;
+  handle?: (from: SOURCE) => PartialDeep<DESTINATION>;
   option?: OptionProp;
 }): Partial<DESTINATION> {
   const result: Partial<DESTINATION> = {};

@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import { mapping } from '../src';
-import { IUser, ICustomer } from './interface';
+import { IUser, ICustomer, ICustomerCompany, IUserCompany } from './interface';
 
 const customer: ICustomer = {
   firstName: 'Tuan',
@@ -56,7 +56,15 @@ describe('MAPPING CUSTOMER - USER', () => {
       handle: (from) => {
         return {
           name: `${from.firstName} ${from.lastName}`,
-          companies: [{ name: from.company.name, website: from.company.website }]
+          companies: [
+            mapping<ICustomerCompany, IUserCompany>({
+              from: customer.company,
+              mapper: {
+                name: 'name',
+                website: 'website'
+              }
+            })
+          ]
         };
       }
     });
