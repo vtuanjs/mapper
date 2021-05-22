@@ -12,7 +12,9 @@ const customer: ICustomer = {
   company: {
     name: 'COMPANY',
     website: 'company.com'
-  }
+  },
+
+  tag: null
 };
 
 describe('MAPPING CUSTOMER - USER', () => {
@@ -21,7 +23,8 @@ describe('MAPPING CUSTOMER - USER', () => {
       from: customer,
       mapper: {
         email: 'email',
-        mobile: 'phone'
+        mobile: 'phone',
+        tag: 'tag'
       },
       handle: (from) => {
         return {
@@ -34,6 +37,34 @@ describe('MAPPING CUSTOMER - USER', () => {
     expect(user.email).to.be.a('string');
     expect(user.mobile).to.be.a('string');
     expect(user.name).to.be.a('string');
+    expect(user).has.not.ownProperty('tag');
+    expect(user.companies).to.be.a('array');
+    done();
+  });
+
+  it('should be mapped value from customer object to user object. "Tag" should be ""', (done) => {
+    const user = mapping<ICustomer, IUser>({
+      from: customer,
+      mapper: {
+        email: 'email',
+        mobile: 'phone',
+        tag: 'tag'
+      },
+      option: {
+        setValueWhenNull: ''
+      },
+      handle: (from) => {
+        return {
+          name: `${from.firstName} ${from.lastName}`,
+          companies: [{ name: from.company.name, website: from.company.website }]
+        };
+      }
+    });
+
+    expect(user.email).to.be.a('string');
+    expect(user.mobile).to.be.a('string');
+    expect(user.name).to.be.a('string');
+    expect(user.tag).is.eqls('');
     expect(user.companies).to.be.a('array');
     done();
   });

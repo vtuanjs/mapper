@@ -5,6 +5,21 @@ Mapping data from object to another object
 npm install @vtjs/mapper
 
 ### 2. HOW TO USE
+```
+Structure: mapping(from, mapper, handle?, option?)
+```
+
+- from: Data source
+- mapper: Mapping key by key:
+```
+"destinationKey": "sourceKey"
+```
+- handle (optional): Custom function. You need return value of destination object.
+- option (optional):
+```
+setValueWhenNull: "your value",
+setValueWhenUndefined: "your value"
+```
 
 #### 2.1. Simple with Javascript
 

@@ -11,7 +11,9 @@ const customer = {
   company: {
     name: 'COMPANY',
     website: 'company.com'
-  }
+  },
+
+  tag: null
 };
 
 const user = mapping({

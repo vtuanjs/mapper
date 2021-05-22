@@ -8,6 +8,8 @@ export interface ICustomer {
     name: string;
     website: string;
   };
+
+  tag: string | null;
 }
 
 export interface IUser {
@@ -16,4 +18,5 @@ export interface IUser {
   mobile: string;
 
   companies: { name: string; website: string }[];
+  tag: string | null;
 }
