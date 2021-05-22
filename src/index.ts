@@ -19,8 +19,8 @@ export function mapping<SOURCE = DefaultType, DESTINATION = DefaultType>({
   };
   handle?: (from: SOURCE) => PartialDeep<DESTINATION>;
   option?: OptionProp;
-}): Partial<DESTINATION> {
-  const result: Partial<DESTINATION> = {};
+}): DESTINATION {
+  const result: DESTINATION = {} as any;
 
   for (const key of Object.keys(mapper)) {
     const fromKey = mapper[key];
